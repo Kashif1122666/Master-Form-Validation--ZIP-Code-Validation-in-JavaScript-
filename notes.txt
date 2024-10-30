@@ -1,0 +1,47 @@
+chapter 85: Form validation :  ZIP CODES
+
+Now, a one-field form that asks the user to enter her ZIP code.
+You've already learned how to make sure the user hasn't left the field blank. But how do
+you test whether she's entered the right number of digits for a ZIP—5 digits?
+HTML gives you a way to keep her from entering too many digits: maxlength=5. But if
+you want to make sure she hasn't entered too few digits, you need to use JavaScript. Here's the
+function.
+
+function validateZIP() {
+     var numChars = document.getElementById("zip").value.length;
+     if (numChars < 5) {
+     alert("Please enter a 5-digit code.");
+     return false;
+ }
+   }
+If the number of characters in the field is fewer than 5, an alert displays and false is
+returned to the calling code, cancelling the form submission.
+
+
+
+Another question to ask about the ZIP field entry is whether the user has entered only
+numbers. Here's the additional code for that.
+     function validateZIP() {
+         var valueEntered = document.getElementById("zip").value;
+         var numChars = valueEntered.length;
+            if (numChars < 5) {
+                  alert("Please enter a 5-digit code.");
+                  return false;
+                 }
+         for (var i = 0; i <= 4; i++) {
+            var thisChar = parseInt(valueEntered[i]);
+                if (isNaN(thisChar)) {
+                alert("Please enter only numbers.");
+                return false;
+                       }
+                    }
+                }
+The above for loop code loops through the five characters that have been entered, checking to
+make sure that all the characters are string characters representing numbers. Because the five
+characters in the field are string characters, each one has to be converted to a number if
+possible before being tested. Line 9 does this. Line 10 tests to see whether the attempted
+conversion worked. If a number resulted from parseInt in line 9, no problem. But if the
+character isn't a number after the conversion attempt—if it isNaN in line 10—an alert displays
+and false is returned, cancelling the form submission.                
+
+
